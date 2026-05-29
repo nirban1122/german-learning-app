@@ -1,0 +1,18 @@
+{
+  "id": "vocabulary",
+  "name": "Vocabulary Generation Template",
+  "description": "Generates themed vocabulary lists with articles, example sentences, mnemonics, and etymology notes.",
+  "version": 1,
+  "isActive": true,
+  "template": "You are a German vocabulary specialist. Create a vocabulary list based on the following parameters.\n\nTOPIC: {topic}\nLEVEL: {level}\nNUMBER OF WORDS: {numWords}\nINCLUDE ETYMOLOGY: {includeEtymology}\nINCLUDE MNEMONICS: {includeMnemonics}\nWORD TYPES: {wordTypes} (nouns, verbs, adjectives, adverbs, phrases, all)\n\n---\n\nREQUIREMENTS:\n\n1. **For Each Word**:\n   - German word with correct spelling and capitalization\n   - For nouns: article (der/die/das) and plural form\n   - For verbs: conjugation pattern (regular/irregular), separable prefix if applicable\n   - English translation (precise, not approximate)\n   - 2 example sentences in German (one simple, one complex)\n   - 2 example sentences in English\n\n2. **Learning Aids** (if enabled):\n   - **Mnemonic**: Memory trick linking German word to English or visual image\n   - **Etymology**: Word origin, related German words, cognates in English\n   - **Common Collocations**: 2-3 common word pairings\n\n3. **Organization**:\n   - Group by word type (nouns first, then verbs, etc.)\n   - Within each group, order by frequency of use\n   - Mark high-frequency words with [ESSENTIAL], medium with [IMPORTANT], low with [ADVANCED]\n\n4. **Practice Integration**:\n   - Suggest 3 ways to practice this vocabulary set\n   - Include a mini-dialogue using 5+ words from the list\n   - Create a \"challenge sentence\" combining multiple words\n\n---\n\nSTYLE GUIDELINES:\n- Use clear, learner-friendly explanations\n- Highlight false friends (words that look like English but mean something different)\n- Note regional variations (Austrian, Swiss German where applicable)\n- Mark informal/colloquial words appropriately\n\n---\n\nOUTPUT FORMAT:\nReturn valid JSON:\n{\n  \"title\": \"string\",\n  \"topic\": \"string\",\n  \"level\": \"string\",\n  \"totalWords\": number,\n  \"categories\": [\n    {\n      \"wordType\": \"nouns|verbs|adjectives|adverbs|phrases\",\n      \"words\": [\n        {\n          \"german\": \"string\",\n          \"article\": \"der|die|das|null\",\n          \"plural\": \"string\",\n          \"english\": \"string\",\n          \"frequency\": \"essential|important|advanced\",\n          \"exampleSimple\": {\"german\": \"string\", \"english\": \"string\"},\n          \"exampleComplex\": {\"german\": \"string\", \"english\": \"string\"},\n          \"mnemonic\": \"string\",\n          \"etymology\": \"string\",\n          \"collocations\": [\"string\"],\n          \"falseFriend\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"practiceDialogue\": {\n    \"german\": \"string\",\n    \"english\": \"string\"\n  },\n  \"practiceTips\": [\"string\"],\n  \"challengeSentence\": {\"german\": \"string\", \"english\": \"string\"}\n}",
+  "variables": {
+    "topic": {"type": "string", "description": "Vocabulary theme"},
+    "level": {"type": "enum", "values": ["A1", "A2", "B1", "B2", "C1"]},
+    "numWords": {"type": "number", "description": "Number of words to generate (5-30)"},
+    "includeEtymology": {"type": "boolean"},
+    "includeMnemonics": {"type": "boolean"},
+    "wordTypes": {"type": "enum", "values": ["nouns", "verbs", "adjectives", "adverbs", "phrases", "all"]}
+  },
+  "lastEdited": null,
+  "editedBy": null
+}

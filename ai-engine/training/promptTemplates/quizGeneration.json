@@ -1,0 +1,21 @@
+{
+  "id": "quizGeneration",
+  "name": "Quiz Generation Template",
+  "description": "Creates quizzes with multiple question types, difficulty distribution, and answer keys.",
+  "version": 1,
+  "isActive": true,
+  "template": "You are a German language assessment designer. Create a quiz based on the following parameters.\n\nTOPIC: {topic}\nLEVEL: {level}\nTOTAL QUESTIONS: {numQuestions}\nQUESTION TYPES: {questionTypes} (multipleChoice, fillInBlank, matching, trueFalse, shortAnswer)\nDIFFICULTY DISTRIBUTION: Easy {easyPercent}%, Medium {mediumPercent}%, Hard {hardPercent}%\nTIME LIMIT: {timeLimit} minutes\nPASSING SCORE: {passingScore}%\n\n---\n\nQUIZ REQUIREMENTS:\n\n1. **Question Distribution**:\n   - Exactly {numQuestions} total questions\n   - Spread across the specified question types\n   - Follow the difficulty distribution (easy/medium/hard)\n\n2. **Question Types**:\n   - **multipleChoice**: 4 options (A-D), one correct answer, plausible distractors\n   - **fillInBlank**: Complete the German sentence with the missing word\n   - **matching**: Match German phrases/words to English equivalents (5 pairs)\n   - **trueFalse**: Statement with clear true/false answer + explanation\n   - **shortAnswer**: Open-ended with model answer and grading criteria\n\n3. **Content Requirements**:\n   - Questions must be level-appropriate (vocabulary, grammar complexity)\n   - Include at least 2 questions testing listening/reading comprehension\n   - Include at least 2 questions testing grammar knowledge\n   - Include at least 2 questions testing vocabulary\n   - Distractors must be plausible but clearly wrong\n\n4. **Answer Key**:\n   - Correct answer for every question\n   - Brief explanation of why the answer is correct\n   - For wrong answers in multiple choice, explain why they're wrong\n\n---\n\nSTYLE GUIDELINES:\n- Questions should be clearly worded in German\n- For A1-A2: Use English for complex instructions if needed\n- For B1-C1: All instructions in German\n- Avoid culturally biased questions\n- Test practical, real-world language use\n\n---\n\nREFERENCE EXAMS (for style matching):\n{adminProvidedExamples}\n\n---\n\nOUTPUT FORMAT:\nReturn valid JSON:\n{\n  \"title\": \"string\",\n  \"level\": \"string\",\n  \"topic\": \"string\",\n  \"timeLimit\": number,\n  \"passingScore\": number,\n  \"questions\": [\n    {\n      \"id\": number,\n      \"type\": \"multipleChoice|fillInBlank|matching|trueFalse|shortAnswer\",\n      \"difficulty\": \"easy|medium|hard\",\n      \"question\": \"string\",\n      \"options\": [\"string\"], // for multipleChoice\n      \"correctIndex\": number, // for multipleChoice\n      \"answer\": \"string\", // for fillInBlank, trueFalse, shortAnswer\n      \"matchingPairs\": [{\"german\": \"string\", \"english\": \"string\"}], // for matching\n      \"explanation\": \"string\"\n    }\n  ],\n  \"totalScore\": number,\n  \"scoringRubric\": {\n    \"multipleChoice\": number,\n    \"fillInBlank\": number,\n    \"matching\": number,\n    \"trueFalse\": number,\n    \"shortAnswer\": number\n  }\n}",
+  "variables": {
+    "topic": {"type": "string", "description": "Quiz topic or scope"},
+    "level": {"type": "enum", "values": ["A1", "A2", "B1", "B2", "C1"]},
+    "numQuestions": {"type": "number", "description": "Total questions (10-30)"},
+    "questionTypes": {"type": "string", "description": "Comma-separated question types"},
+    "easyPercent": {"type": "number", "description": "Percentage of easy questions"},
+    "mediumPercent": {"type": "number", "description": "Percentage of medium questions"},
+    "hardPercent": {"type": "number", "description": "Percentage of hard questions"},
+    "timeLimit": {"type": "number", "description": "Time limit in minutes"},
+    "passingScore": {"type": "number", "description": "Passing score percentage"}
+  },
+  "lastEdited": null,
+  "editedBy": null
+}

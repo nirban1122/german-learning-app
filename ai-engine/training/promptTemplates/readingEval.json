@@ -1,0 +1,18 @@
+{
+  "id": "readingEval",
+  "name": "Reading Comprehension Template",
+  "description": "Generates level-appropriate German reading passages with comprehension questions and vocabulary support.",
+  "version": 1,
+  "isActive": true,
+  "template": "You are a German reading materials creator. Generate a reading passage based on the following parameters.\n\nTOPIC: {topic}\nLEVEL: {level}\nPASSAGE LENGTH: {length} words\nGENRE: {genre} (narrative, informative, opinion, dialogue, advertisement, literary)\nCOMPREHENSION QUESTIONS: {numQuestions}\nVOCABULARY SUPPORT: {vocabularySupport}\n\n---\n\nREQUIREMENTS:\n\n1. **Reading Passage**:\n   - Exactly {length} words (±10%)\n   - Engaging, authentic-feeling content\n   - Clear structure (introduction, body, conclusion for informative)\n   - Appropriate for the genre selected\n   - Culturally relevant to German-speaking countries\n\n2. **Level Adaptation**:\n   - **A1**: Simple present tense, basic vocabulary, short sentences (5-10 words)\n   - **A2**: Present + perfect tense, common connectors, slightly longer sentences\n   - **B1**: Varied tenses (including future), subordinate clauses, moderate vocabulary\n   - **B2**: Passive voice, subjunctive, complex sentences, idiomatic expressions\n   - **C1**: Native-level complexity, nuanced language, literary devices\n\n3. **Comprehension Questions** ({numQuestions}):\n   - 30% literal (directly stated in text)\n   - 40% inferential (requires connecting ideas)\n   - 30% critical (opinion, evaluation, relating to own experience)\n   - Mix of formats: multiple choice, short answer, true/false, open-ended\n\n4. **Vocabulary Support** (if enabled):\n   - Glossary of 5-10 challenging words from the passage\n   - Each with: German word, English translation, example sentence from text\n   - Context hints for understanding difficult sentences\n\n5. **Discussion Prompts**:\n   - 2-3 questions for classroom or tutor-led discussion\n   - Related to the theme but extending beyond the text\n\n---\n\nSTYLE GUIDELINES:\n- Write about topics relevant to German culture, history, and daily life\n- Include a brief \"About Germany\" cultural fact connected to the topic\n- Avoid stereotypes and outdated representations\n- For B2+: Use authentic text types (news articles, blog posts, short stories)\n\n---\n\nOUTPUT FORMAT:\nReturn valid JSON:\n{\n  \"title\": \"string\",\n  \"level\": \"string\",\n  \"genre\": \"string\",\n  \"wordCount\": number,\n  \"passage\": \"string\",\n  \"vocabulary\": [\n    {\n      \"german\": \"string\",\n      \"english\": \"string\",\n      \"sentenceFromText\": \"string\",\n      \"contextHint\": \"string\"\n    }\n  ],\n  \"questions\": [\n    {\n      \"id\": number,\n      \"type\": \"multipleChoice|shortAnswer|trueFalse|openEnded\",\n      \"difficulty\": \"literal|inferential|critical\",\n      \"question\": \"string\",\n      \"options\": [\"string\"],\n      \"correctAnswer\": \"string\",\n      \"explanation\": \"string\"\n    }\n  ],\n  \"discussionPrompts\": [\"string\"],\n  \"culturalNote\": \"string\"\n}",
+  "variables": {
+    "topic": {"type": "string", "description": "Subject of the reading passage"},
+    "level": {"type": "enum", "values": ["A1", "A2", "B1", "B2", "C1"]},
+    "length": {"type": "number", "description": "Target word count (100-800)"},
+    "genre": {"type": "enum", "values": ["narrative", "informative", "opinion", "dialogue", "advertisement", "literary"]},
+    "numQuestions": {"type": "number", "description": "Number of comprehension questions (3-10)"},
+    "vocabularySupport": {"type": "boolean", "description": "Include vocabulary glossary"}
+  },
+  "lastEdited": null,
+  "editedBy": null
+}
